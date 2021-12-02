@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAM Pharmacy-Login</title>
+    <link rel="icon" href="images/logocircle.png" type="image/gif">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <script type="text/javascript">
+	    
+	    function fun(){	  
+    		var email = document.reg1.email.value;
+    		var pass = document.reg1.password.value;
+    		alert("inside");
+    		var obj = new XMLHttpRequest();
+    		obj.open("POST",'/LoginValidator',true);
+    		obj.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    		
+    		obj.onreadystatechange = function fun2(){
+    			
+    			if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    				var res = obj.responseText;
+    				alert(res);
+    				if(new String(res).valueOf().trim() == new String("success").valueOf().trim()){
+    					alert("success");
+    				}
+    				else if(new String(res).valueOf().trim() != new String("success").valueOf().trim()){
+    					alert("fail");
+    					document.getElementById("resp").innerHTML = "<p>Failed</p>";
+	    			}
+    		    }
+    		}
+    		
+    		obj.send("email="+email+"&password="+pass);
+		}
+	    function Redirect() {
+	        window.location = "reg.jsp";
+	    }
+    </script>
+</head>
+<body>
+  <div class="logo1">
+      <img class ="logo" src ="images/logo.png"alt="">
+  </div>
+
+    <div class="main">
+
+        <div class="left-side">
+            <img src="images/cuptab.jpg" alt="">
+        </div>
+        <div class="left-side">
+
+            <h1>Sign In</h1><div id="resp"></div>
+            <div>
+            <form name="reg1">
+            <div>
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter Your Email-Id" name="email">
+            </div>
+            <div>
+                <i class="fas fa-key"></i>
+                <input type="password" placeholder="Enter Your Password" name="password">
+            </div>
+            <button type="submit" onclick="return fun()">Sign in</button>
+            <br>
+            <a style="text-decoration:none;"href="reg.jsp">New User? Register</a>
+            </form>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
